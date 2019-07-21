@@ -135,6 +135,12 @@
     <Compile Include="mcal_gpio.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="mcal_spi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mcal_spi.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="sh1106.c">
       <SubType>compile</SubType>
     </Compile>

@@ -9,56 +9,8 @@
  * Xplained Atmega 328P devboard. 16 MHz clock,
  *
  *
- */ 
-
-
-// It must be first line in the code.
-#define F_CPU 16000000UL  // set i the project properties
-
-#include <avr/io.h>
-
-#include "util/delay.h"
-
-
-// Blinking LED for tests.
-#define LCD_LED_CONFIG	DDRB |=  (1 << PB5)
-#define LCD_LED_SET		PORTB |= (1 << PB5)
-#define LCD_LED_RESET	PORTB &= ~(1 << PB5)
-
-
-int main(void)
-{
-
-	LCD_LED_CONFIG;
-
-	while (1)
-	{
-		LCD_LED_SET;
-		_delay_ms(2000);
-		LCD_LED_RESET;
-		_delay_ms(2000);
-	}
-}
-
-
-
-
-
-/*
- * Base Core Atmega328
  *
- * Author : arek
- *
- * The first "old" oled approach:
- * Fonts.c
- * SSD1306.c
- * TWI_Master.c
- *
- * The "new" 171229 oled approach, taken from Arduino:
- *
- * https://electronics.stackexchange.com/questions/156930/stm32-understanding-gpio-settings
- *
- * Display:                                           Arduino Mini Pro
+ * Display:                                           Xplained Atmega 328P - 16 MHz
  *
  * OLED_RST    9 ------------------------------------------------- 9    PB1
  * OLED_DC     8 ------------------------------------------------- 8    PB0
@@ -66,16 +18,16 @@ int main(void)
  * SPI_MOSI   11  -  connect to the DIN pin of OLED - D11 - MOSI - 11   PB3 (MOSI)
  * SPI_SCK    13  -  connect to the CLK pin of OLED - D13 - SCK  - 13   PB5 (SCK) (LED is connected here)
  *
- * 
- * 
+ *
  */ 
+
 
 // CHANGELOG:
 //
 // 1.[171230]
 // Working OLED, however SPI should be CPOL=0 and CPHA=0, different than show in OLED datasheed
 // (CPOL=1, CPHA=1).
-// 
+//
 // Only display bitmap is tested. There is small garbage at the bottom. In arduino it is ok.
 // Check.
 //
@@ -102,7 +54,7 @@ int main(void)
 // to monitor the clock , data and cs lines. You'll have immediate info if the SPI device
 // is alive and maybe responding. By the way the most trouble I had with SPI interfaced
 // devices was caused by the CS being set/cleared at wrong times for the SPI slave.
-// 
+//
 //
 // Arduino default:
 // - Mode 0 (the default) - clock is normally low (CPOL = 0) (SPI_POLARITY_HIGH - stm), and the data is sampled
@@ -128,25 +80,23 @@ int main(void)
 
 
 
-
-//#define F_CPU 8000000UL
+// It must be first line in the code.
+#define F_CPU 16000000UL  // set i the project properties
 
 #include <avr/io.h>
+#include <avr/io.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
+//#include <util/delay.h>
 #include <stdint.h>
 
-/*
-#include "dbg.h"
-#include "TWI_Master.h"
-#include "Fonts.h"
-#include "SSD1306.h"
-*/
+#include "util/delay.h"
 
 // oled "new" sh1106.h
 #include "sh1106.h"
 //test
 #include "mcal_gpio.h"
+
+
 
 #if 0
 
@@ -165,79 +115,19 @@ int main(void)
 #endif
 
 
+
+// Blinking LED for tests.
+#define LCD_LED_CONFIG	DDRB |=  (1 << PB5)
+#define LCD_LED_SET		PORTB |= (1 << PB5)
+#define LCD_LED_RESET	PORTB &= ~(1 << PB5)
+
+
+
 int main(void)
 {
 
-/* Old, SSD1306.c, TWI_Master.c based.	
-  // Init I2C	
-  TWI_Master_Initialise();
-  sei();	
-	
-  ssd1306_init();
-	
-	
-    ssd1306_clear_screen(0xFF);
-	_delay_ms(1000);
-	ssd1306_clear_screen(0x00);
-	ssd1306_display_string(18, 0, "1.3inch OLED", 16, 1);
-	ssd1306_display_string(0, 16, "This is a demo for SSD1306/1106 OLED moudle!", 16, 1);
-	ssd1306_refresh_gram();
-	_delay_ms(1000);
-	ssd1306_clear_screen(0x00);
-
-	ssd1306_draw_bitmap(0, 2, &c_chSingal816[0], 16, 8);
-	ssd1306_draw_bitmap(24, 2, &c_chBluetooth88[0], 8, 8);
-	ssd1306_draw_bitmap(40, 2, &c_chMsg816[0], 16, 8);
-	ssd1306_draw_bitmap(64, 2, &c_chGPRS88[0], 8, 8);
-	ssd1306_draw_bitmap(90, 2, &c_chAlarm88[0], 8, 8);
-	ssd1306_draw_bitmap(112, 2, &c_chBat816[0], 16, 8);
-
-	ssd1306_draw_3216char(0,16, '2');
-	ssd1306_draw_3216char(16,16, '3');
-	ssd1306_draw_3216char(32,16, ':');
-	ssd1306_draw_3216char(48,16, '5');
-	ssd1306_draw_3216char(64,16, '6');
-	ssd1306_draw_1616char(80,32, ':');
-	ssd1306_draw_1616char(96,32, '4');
-	ssd1306_draw_1616char(112,32, '7');
-	ssd1306_draw_bitmap(87, 16, &c_chBmp4016[0], 40, 16);  
-	
-	ssd1306_display_string(0, 52, "MUSIC", 12, 0);
-	ssd1306_display_string(52, 52, "MENU", 12, 0);
-	ssd1306_display_string(98, 52, "PHONE", 12, 0);
-	
-	ssd1306_refresh_gram();
-	while (1) {};	
-*/	
-	
-	
-/*	const char *msg1 = "The value of val = ";	
-	const char *msg_crlf= "\r\n";	
-	uint32_t val = 0;
-
-	DBG_PINS_INIT;
-	DBG_UartInit()	;
-	while(1)
-	{
-		PORTB |= (1<<PORTB0);  // LED
-		DBG_PIN0_TOGGLE;
-		DBG_PIN1_TOGGLE;
-		DBG_PIN2_TOGGLE;
+	LCD_LED_CONFIG;
 		
-		_delay_ms(500);
-		
-		DBG_UartPrintStr(msg1);
-		DBG_UartPrintDec(DBG_DecMsgBuff, DBG_DEC_MSG_BUFF_LEN, val);
-		DBG_UartPrintStr(msg_crlf);
-		
-		PORTB &= ~(1<<PORTB0);
-		_delay_ms(500);
-		
-		if (val < 99999999) val++;
-	}
-*/
-
-
     // oled "new"
 	//todo move to better place
 	uint8_t oled_buf[WIDTH * HEIGHT / 8];
@@ -265,33 +155,14 @@ int main(void)
 	SH1106_display(oled_buf);
 #endif
 
-    // Test.
-	// PD2 (arduino D2) is used as a LED indicator.
-	DDRD = (1<<DDD2);
-	while(1)
+
+	// Test
+	while (1)
 	{
-		PORTD |= (1<<PORTD2);  
-		_delay_ms(500);
-		PORTD &= ~(1<<PORTD2);
-		_delay_ms(500);
+		LCD_LED_SET;
+		_delay_ms(2000);
+		LCD_LED_RESET;
+		_delay_ms(2000);
 	}
-
-
-	// Port PB5 isused by SPI and LED.
-	/*
-    DDRB = 0xFF; //Nakes PORTC as Output
-	while(1)
-	{
-		//PORTB &= ~(1<<PORTB1);
-
-		//PORTB = 0xFF; //Turns ON All LEDs
-		PORTB |= (1<<PORTB5);  // On board Pro Mini LED
-		_delay_ms(1000);
-		//PORTB = 0x00;
-		PORTB &= ~(1<<PORTB5);
-		_delay_ms(1000);
-		
-	}
-	*/
 	
 }
