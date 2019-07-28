@@ -25,6 +25,11 @@
 // SPI Mode = 3, if CPOL = 1 and CPHA = 1
 // Clock cycle 250ns = 4 MHz.
 //
+//
+// TODO:
+// 1.
+// Move fonts and bitmaps to flash
+//
 
 
 //#include <SPI.h>
@@ -265,6 +270,8 @@ const uint8_t Font1608[95][16] = {
     {0x00,0x00,0x60,0x00,0x80,0x00,0x80,0x00,0x40,0x00,0x40,0x00,0x20,0x00,0x20,0x00},/*"~",94*/
 };
 
+// width: 16
+// height: 32
 //todo: move to flash
 const uint8_t Font3216[11][64] = {
     {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x3F,0xFF,0xFF,0xFC,0x3F,0xFF,0xFF,0xFC,    /*"0",0*/
@@ -323,7 +330,7 @@ const uint8_t Font3216[11][64] = {
     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}
 };    
 
-//todo: move to flash
+//todo: move to flash, better remove it
 const uint8_t Waveshare12864[1024] = {
     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
@@ -569,6 +576,7 @@ void SH1106_pixel(int x, int y, char color, uint8_t* buffer)
         buffer[x+(y/8)*WIDTH] &= ~(1<<(y%8));
 }
 
+// arek: take a look this is 1612 font inside
 void SH1106_char1616(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer)
 {
     uint8_t i, j;
@@ -590,6 +598,68 @@ void SH1106_char1616(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer)
         }
     }
 }
+
+
+//arek test 16x12
+// not working
+/*
+void SH1106_char1612(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer)
+{
+	uint8_t i, j;
+	uint8_t chTemp = 0, y0 = y, chMode = 0;
+
+	for (i = 0; i < 32; i ++) {
+		//chTemp = pgm_read_byte(&Font1612[chChar - 0x30][i]);
+		chTemp = Font1612[chChar - 0x30][i];
+		for (j = 0; j < 8; j ++) {
+			chMode = chTemp & 0x80? 1 : 0;
+			SH1106_pixel(x, y, chMode, buffer);
+			chTemp <<= 1;
+			y ++;
+			if ((y - y0) == 24) {
+				y = y0;
+				x ++;
+				break;
+			}
+		}
+	}
+}
+*/
+	  
+
+// arek
+// Test 16x8
+/*
+void SH1106_char1608(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer)
+{
+	uint8_t i, j;
+	uint8_t chTemp = 0, y0 = y, chMode = 0;
+
+	for (i = 0; i < 32; i++) {
+		//chTemp = pgm_read_byte(&Font3216[chChar - 0x30][i]);
+		chTemp = Font1608[chChar - 0x30][i];
+		for (j = 0; j < 8; j++) {
+			chMode = chTemp & 0x80? 1 : 0;
+			SH1106_pixel(x, y, chMode, buffer);
+			chTemp <<= 1;
+			y++;
+			if ((y - y0) == 16) {
+				y = y0;
+				x++;
+				break;
+			}
+		}
+	}
+}
+*/
+
+
+
+// arek
+// Test 12x6
+
+
+
 
 void SH1106_char(uint8_t x, uint8_t y, uint8_t acsii, uint8_t size, uint8_t mode, uint8_t* buffer)
 {

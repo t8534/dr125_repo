@@ -5,15 +5,6 @@
 //#include <stdint.h>  // uint8_t, etc.
 
 
-/*
-#define OLED_RST_SET        HAL_GPIO_WritePin(OLED_GPIO_PORT, OLED_RST_PIN, GPIO_PIN_SET)
-#define OLED_RST_RESET      HAL_GPIO_WritePin(OLED_GPIO_PORT, OLED_RST_PIN, GPIO_PIN_RESET)
-#define OLED_DC_SET         HAL_GPIO_WritePin(OLED_GPIO_PORT, OLED_DC_PIN, GPIO_PIN_SET)
-#define OLED_DC_RESET       HAL_GPIO_WritePin(OLED_GPIO_PORT, OLED_DC_PIN, GPIO_PIN_RESET)
-#define OLED_CS_SET         HAL_GPIO_WritePin(OLED_GPIO_PORT, OLED_CS_PIN, GPIO_PIN_SET)
-#define OLED_CS_RESET       HAL_GPIO_WritePin(OLED_GPIO_PORT, OLED_CS_PIN, GPIO_PIN_RESET)
-*/
-
 #define OLED_RST_SET        (PORTB |= 0x02)   // OLED_RST  PB1
 #define OLED_RST_RESET      (PORTB &= ~0x02)  // OLED_RST  PB1
 #define OLED_DC_SET         (PORTB |= 0x01)   // OLED_DC   PB0

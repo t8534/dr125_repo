@@ -16,6 +16,35 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   ******************************************************************************
+  *
+  * Display: https://www.waveshare.com/1.3inch-oled-b.htm
+  *
+  * Resolution: 128x64
+  *
+  * Interface:
+  *
+  * PIN      Symbol     Description
+  *
+  *  1       VCC        Power positive input 3.3-5V
+  *  2       GND        Ground
+  *  3       NC         NC
+  *  4       DIN        Data input
+  *  5       CLK        Clock signal input
+  *  6       CS         Chip selection, low active
+  *  7       D/C        Command signal, low level for command, high level for data
+  *  8       RES        Reset signal, low active
+  *
+  *
+  * Hardware config:
+  *
+  * MODE/INTERFACE      BS0/BS1      DIN      SCK
+  *
+  * 3-wire SPI          1/0          MOSI     SCLK
+  * 4-wire SPI          0/0          MOSI     SCLK
+  * I2C                 0/1          SDA      SCL
+  *
+  *
+  *
   */
   
 #ifndef _SH1106_H_
@@ -71,6 +100,8 @@ void SH1106_clear(uint8_t* buffer);
 void SH1106_pixel(int x, int y, char color, uint8_t* buffer);
 void SH1106_bitmap(uint8_t x, uint8_t y, const uint8_t *pBmp, uint8_t chWidth, uint8_t chHeight, uint8_t* buffer);
 void SH1106_char1616(uint8_t x,uint8_t y,uint8_t chChar, uint8_t* buffer);
+//void SH1106_char1612(uint8_t x,uint8_t y,uint8_t chChar, uint8_t* buffer  //arek test
+//void SH1106_char1608(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer);  //arek test
 void SH1106_char3216(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer);
 void SH1106_string(uint8_t x, uint8_t y, const char *pString, uint8_t Size, uint8_t Mode, uint8_t* buffer);
 void SPIWrite(uint8_t *buffer, int bufferLength);
@@ -78,13 +109,13 @@ void command(uint8_t cmd);
 
 extern const uint8_t Font1612[11][32];
 extern const uint8_t Font3216[11][64];
-extern const uint8_t Signal816[16];
-extern const uint8_t Msg816[16];
-extern const uint8_t Bat816[16];
-extern const uint8_t Bluetooth88[8];
-extern const uint8_t GPRS88[8];
-extern const uint8_t Alarm88[8];
-extern const uint8_t Waveshare12864[1024];
+//extern const uint8_t Signal816[16];
+//extern const uint8_t Msg816[16];
+//extern const uint8_t Bat816[16];
+//extern const uint8_t Bluetooth88[8];
+//extern const uint8_t GPRS88[8];
+//extern const uint8_t Alarm88[8];
+//extern const uint8_t Waveshare12864[1024];
 
 
 #endif

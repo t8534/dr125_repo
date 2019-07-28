@@ -8,6 +8,20 @@
  * 
  * Xplained Atmega 328P devboard. 16 MHz clock,
  *
+ * Atmega 328P
+ * Flash: 32 KB
+ * RAM:    2 KB
+ * EEPROM: 1 KB
+ *
+ * Atmega 328P
+ * Flash: 16 KB
+ * RAM:    1 KB
+ * EEPROM: 512 B 
+ *
+ *
+ * Display: https://www.waveshare.com/wiki/1.3inch_OLED_(B)
+ *
+ * Resolution 128x64
  *
  *
  * Display:                                           Xplained Atmega 328P - 16 MHz
@@ -37,8 +51,16 @@
 //
 // 1.[171231_1107]
 // Only display bitmap is tested. There is small garbage at the bottom. In arduino it is ok.
-// Clarify it.
+// 
+// 2.[190728]
+// Move fonts and bitmaps to flash
 //
+// 3.
+// test flashing led PB5 not working if bitmap test compiled
+//
+// 4.
+// After display bitmap, SH1106_clear(oled_buf) not clear display
+// 
 
 
 // NOTES
@@ -83,7 +105,7 @@
 // It must be first line in the code.
 #define F_CPU 16000000UL  // set i the project properties
 
-#include <avr/io.h>
+//#include <avr/io.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 //#include <util/delay.h>
@@ -130,9 +152,11 @@ int main(void)
 		
     // oled "new"
 	//todo move to better place
-	uint8_t oled_buf[WIDTH * HEIGHT / 8];
-	
+	uint8_t oled_buf[WIDTH * HEIGHT / 8];  // 1024 bytes
+
+    ///////////////////////////////////////////////////////	
 	// display an image of bitmap matrix
+/*
 	SH1106_begin();
 	
 	SH1106_clear(oled_buf);
@@ -140,8 +164,12 @@ int main(void)
 	SH1106_display(oled_buf);
 	_delay_ms(2000);
 	SH1106_clear(oled_buf);
+*/
 
-#if 0
+    ///////////////////////////////////////////////////////
+	// Test fonts 32x16 - working, however in place of semicolon is something similar
+/*	
+	SH1106_begin();
 	//SH1106_clear(oled_buf);
 	SH1106_char3216(0, 16, '1', oled_buf);
 	SH1106_char3216(16, 16, '2', oled_buf);
@@ -151,11 +179,99 @@ int main(void)
 	SH1106_char3216(80, 16, ':', oled_buf);
 	SH1106_char3216(96, 16, '5', oled_buf);
 	SH1106_char3216(112, 16, '6', oled_buf);
+	SH1106_display(oled_buf);
+*/
+
+    ///////////////////////////////////////////////////////
+    // Test fonts 16x12 - working, however in place of semicolon is something similar
+	// and fuction is SH1106_char1616
+/*
+    SH1106_begin();
+    //SH1106_clear(oled_buf);
+    SH1106_char1616(0, 16, '1', oled_buf);
+    SH1106_char1616(16, 16, '2', oled_buf);
+    SH1106_char1616(32, 16, ':', oled_buf);
+    SH1106_char1616(48, 16, '3', oled_buf);
+    SH1106_char1616(64, 16, '4', oled_buf);
+    SH1106_char1616(80, 16, ':', oled_buf);
+    SH1106_char1616(96, 16, '5', oled_buf);
+    SH1106_char1616(112, 16, '6', oled_buf);
+
+    SH1106_display(oled_buf);
+*/
+
+/*
+    ///////////////////////////////////////////////////////
+    // Arek function SH1106_char1612() 
+	// not working
+
+    SH1106_begin();
+    //SH1106_clear(oled_buf);
+    SH1106_char1612(0, 16, '1', oled_buf);
+    SH1106_char1612(16, 16, '2', oled_buf);
+    SH1106_char1612(32, 16, ':', oled_buf);
+    SH1106_char1612(48, 16, '3', oled_buf);
+    SH1106_char1612(64, 16, '4', oled_buf);
+    SH1106_char1612(80, 16, ':', oled_buf);
+    SH1106_char1612(96, 16, '5', oled_buf);
+    SH1106_char1612(112, 16, '6', oled_buf);
+
+    SH1106_display(oled_buf);
+*/
+
+
+	// GUI
+	// 1234 rpm - not working, probably display only numbers
+	// It displays:  '1234 20mess'
+	/*
+	SH1106_begin();
+	//SH1106_clear(oled_buf);
+	SH1106_char3216(0, 16, '1', oled_buf);
+	SH1106_char3216(16, 16, '2', oled_buf);
+	SH1106_char3216(32, 16, '3', oled_buf);
+	SH1106_char3216(48, 16, '4', oled_buf);
+	SH1106_char3216(64, 16, ' ', oled_buf);
+	SH1106_char3216(80, 16, 'r', oled_buf);
+	SH1106_char3216(96, 16, 'p', oled_buf);
+	SH1106_char3216(112, 16, 'm', oled_buf);
+	SH1106_display(oled_buf);
+	*/
+	
+	// try again, only with numbers:
+
+	SH1106_begin();
+	//SH1106_clear(oled_buf);
+	// rpm
+	SH1106_char3216(0, 0, '1', oled_buf);
+	SH1106_char3216(16, 0, '2', oled_buf);
+	SH1106_char3216(32, 0, '3', oled_buf);
+	SH1106_char3216(48, 0, '4', oled_buf);
+
+	// temperature
+	SH1106_char3216(80, 32, '2', oled_buf);
+	SH1106_char3216(96, 32, '5', oled_buf);
+	SH1106_char3216(112, 32, '6', oled_buf);
+	
+	// moto hours
+    SH1106_char1616(80, 8, '8', oled_buf);  // todo: bug 9 is not displaying correctly, 8 is correct !
+    SH1106_char1616(96, 8, '8', oled_buf);
+    SH1106_char1616(112, 8, '7', oled_buf);
+
+	// voltage
+	SH1106_char1616(0, 40, '1', oled_buf);
+	SH1106_char1616(16, 40, '2', oled_buf);
+	//SH1106_char1616(32, 40, '.', oled_buf);  // todo: bug, dot is messy
+	SH1106_char1616(32, 40, '0', oled_buf);
+	SH1106_char1616(48, 40, '4', oled_buf);
+	SH1106_char1616(64, 40, '3', oled_buf);
 
 	SH1106_display(oled_buf);
-#endif
+	
 
 
+
+
+/*
 	// Test
 	while (1)
 	{
@@ -164,5 +280,6 @@ int main(void)
 		LCD_LED_RESET;
 		_delay_ms(2000);
 	}
+*/	
 	
 }
