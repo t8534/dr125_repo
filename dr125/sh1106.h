@@ -107,8 +107,11 @@ void SH1106_string(uint8_t x, uint8_t y, const char *pString, uint8_t Size, uint
 void SPIWrite(uint8_t *buffer, int bufferLength);
 void command(uint8_t cmd);
 
-extern const uint8_t Font1612[11][32];
-extern const uint8_t Font3216[11][64];
+//arek
+void SH1106_char(uint8_t x, uint8_t y, uint8_t acsii, uint8_t size, uint8_t mode, uint8_t* buffer);
+
+//extern const uint8_t Font1612[11][32];
+//extern const uint8_t Font3216[11][64];
 //extern const uint8_t Signal816[16];
 //extern const uint8_t Msg816[16];
 //extern const uint8_t Bat816[16];

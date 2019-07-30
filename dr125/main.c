@@ -221,24 +221,8 @@ int main(void)
 
 
 	// GUI
-	// 1234 rpm - not working, probably display only numbers
-	// It displays:  '1234 20mess'
+	// Could be ok, for initial tests.
 	/*
-	SH1106_begin();
-	//SH1106_clear(oled_buf);
-	SH1106_char3216(0, 16, '1', oled_buf);
-	SH1106_char3216(16, 16, '2', oled_buf);
-	SH1106_char3216(32, 16, '3', oled_buf);
-	SH1106_char3216(48, 16, '4', oled_buf);
-	SH1106_char3216(64, 16, ' ', oled_buf);
-	SH1106_char3216(80, 16, 'r', oled_buf);
-	SH1106_char3216(96, 16, 'p', oled_buf);
-	SH1106_char3216(112, 16, 'm', oled_buf);
-	SH1106_display(oled_buf);
-	*/
-	
-	// try again, only with numbers:
-
 	SH1106_begin();
 	//SH1106_clear(oled_buf);
 	// rpm
@@ -266,7 +250,142 @@ int main(void)
 	SH1106_char1616(64, 40, '3', oled_buf);
 
 	SH1106_display(oled_buf);
+	*/
+
+
+	// Test 16x8 and string
+	//const char *msg = "A";
+//	const char *msg1 = "MILEGO DNIA";
+//	const char *msg2 = "ASSEMBLERKU";
+
+	// test, 16x4 znaki
+/*
+	const char *msg1 = " !#$%&()*+,-./01";  // ok
+	const char *msg2 = "23456789:;<=>?@A";  // ok
+	const char *msg3 = "BCDEFGHIJKLMNOPQ";  // ok
+	const char *msg4 = "RSTUVWXYZ[]_abcd";  // do X ok, odn Y smieci
+*/
+
+/*
+	const char *msg1 = "AAAAAAAAAAAAAAAA";  // 
+	const char *msg2 = "AAAAAAAAAAAAAAAA";  // 
+	const char *msg3 = "AAAAAAAAAAAAAAAA";  // 
+	const char *msg4 = "AAAAAAAAAAAAAAAA";  // 
+	*/
 	
+	//const char *msg5 = "abcdefghijklmnop";
+	//const char *msg5 = "abcdefghijklmnop";
+	
+	SH1106_begin();
+	SH1106_clear(oled_buf);
+	// SH1106_string(uint8_t x, uint8_t y, const char *pString, uint8_t Size, uint8_t Mode, uint8_t* buffer)
+
+	//SH1106_string(0, 0, msg1, 16, 1, oled_buf);
+	//SH1106_string(0, 20, msg2, 16, 1, oled_buf);
+
+	/*
+	SH1106_string(0, 0, msg1, 16, 1, oled_buf);
+	SH1106_string(0, 16, msg2, 16, 1, oled_buf);
+	SH1106_string(0, 32, msg3, 16, 1, oled_buf);
+	SH1106_string(0, 48, msg4, 16, 1, oled_buf);
+	*/
+
+	//SH1106_string(0, 0, msg4, 16, 1, oled_buf);  // tutaj smieci sa od Z
+
+
+	//SH1106_string(0, 0, msg5, 16, 1, oled_buf);  // czarny ekran
+
+
+/*
+	SH1106_char(0, 0, ' ', 16, 1, oled_buf);
+	SH1106_char(8, 0, '!', 16, 1, oled_buf);
+	SH1106_char(16, 0, '#', 16, 1, oled_buf);
+	SH1106_char(24, 0, '$', 16, 1, oled_buf);
+	SH1106_char(32, 0, '%', 16, 1, oled_buf);
+	SH1106_char(40, 0, '&', 16, 1, oled_buf);
+	SH1106_char(48, 0, '(', 16, 1, oled_buf);
+	SH1106_char(56, 0, ')', 16, 1, oled_buf);
+	SH1106_char(64, 0, '*', 16, 1, oled_buf);
+	SH1106_char(72, 0, '+', 16, 1, oled_buf);
+	SH1106_char(80, 0, ',', 16, 1, oled_buf);
+	SH1106_char(88, 0, '-', 16, 1, oled_buf);
+	SH1106_char(96, 0, '.', 16, 1, oled_buf);
+	SH1106_char(104, 0, '/', 16, 1, oled_buf);
+	SH1106_char(112, 0, '0', 16, 1, oled_buf);
+	SH1106_char(120, 0, '1', 16, 1, oled_buf);
+
+	SH1106_char(0, 16, '2', 16, 1, oled_buf);
+	SH1106_char(8, 16, '3', 16, 1, oled_buf);
+	SH1106_char(16, 16, '4', 16, 1, oled_buf);
+	SH1106_char(24, 16, '5', 16, 1, oled_buf);
+	SH1106_char(32, 16, '6', 16, 1, oled_buf);
+	SH1106_char(40, 16, '7', 16, 1, oled_buf);
+	SH1106_char(48, 16, '8', 16, 1, oled_buf);
+	SH1106_char(56, 16, '9', 16, 1, oled_buf);
+	SH1106_char(64, 16, ':', 16, 1, oled_buf);
+	SH1106_char(72, 16, ';', 16, 1, oled_buf);
+	SH1106_char(80, 16, '<', 16, 1, oled_buf);
+	SH1106_char(88, 16, '=', 16, 1, oled_buf);
+	SH1106_char(96, 16, '>', 16, 1, oled_buf);
+	SH1106_char(104, 16, '?', 16, 1, oled_buf);
+	SH1106_char(112, 16, '@', 16, 1, oled_buf);
+	SH1106_char(120, 16, 'A', 16, 1, oled_buf);
+
+	SH1106_char(0, 32, 'B', 16, 1, oled_buf);
+	SH1106_char(8, 32, 'C', 16, 1, oled_buf);
+	SH1106_char(16, 32, 'D', 16, 1, oled_buf);
+	SH1106_char(24, 32, 'E', 16, 1, oled_buf);
+	SH1106_char(32, 32, 'F', 16, 1, oled_buf);
+	SH1106_char(40, 32, 'G', 16, 1, oled_buf);
+	SH1106_char(48, 32, 'H', 16, 1, oled_buf);
+	SH1106_char(56, 32, 'I', 16, 1, oled_buf);
+	SH1106_char(64, 32, 'J', 16, 1, oled_buf);
+	SH1106_char(72, 32, 'K', 16, 1, oled_buf);
+	SH1106_char(80, 32, 'L', 16, 1, oled_buf);
+	SH1106_char(88, 32, 'M', 16, 1, oled_buf);
+	SH1106_char(96, 32, 'N', 16, 1, oled_buf);
+	SH1106_char(104, 32, 'O', 16, 1, oled_buf);
+	SH1106_char(112, 32, 'P', 16, 1, oled_buf);
+	SH1106_char(120, 32, 'Q', 16, 1, oled_buf);
+
+	SH1106_char(0, 48, 'R', 16, 1, oled_buf);
+	SH1106_char(8, 48, 'S', 16, 1, oled_buf);
+	SH1106_char(16, 48, 'T', 16, 1, oled_buf);
+	SH1106_char(24, 48, 'U', 16, 1, oled_buf);
+	SH1106_char(32, 48, 'V', 16, 1, oled_buf);
+	SH1106_char(40, 48, 'W', 16, 1, oled_buf);
+	SH1106_char(48, 48, 'X', 16, 1, oled_buf);
+	SH1106_char(56, 48, 'Y', 16, 1, oled_buf);
+	SH1106_char(64, 48, 'Z', 16, 1, oled_buf);
+	SH1106_char(72, 48, '[', 16, 1, oled_buf);
+	SH1106_char(80, 48, ']', 16, 1, oled_buf);
+	SH1106_char(88, 48, '_', 16, 1, oled_buf);  // blednie odtad
+	SH1106_char(96, 48, 'a', 16, 1, oled_buf);
+	SH1106_char(104, 48, 'b', 16, 1, oled_buf);
+	SH1106_char(112, 48, 'c', 16, 1, oled_buf);
+	SH1106_char(120, 48, 'd', 16, 1, oled_buf);
+*/
+
+
+	//const char *msg5 = "XYZ[]_abcd";	// XYZ[ ok, dalej smieci
+	//const char *msg5 = "XYZ[]";	// XYZ[ ok, dalej smieci
+	//const char *msg5 = "]";  // smiec
+	//const char *msg5 = "_";  // smiec
+	//const char *msg5 = "a";  // nic sie nie wyswietla
+	//const char *msg5 = "p";  // nic sie nie wyswietla
+	//SH1106_string(0, 0, msg5, 16, 1, oled_buf);  
+
+	//void SH1106_char(uint8_t x, uint8_t y, uint8_t acsii, uint8_t size, uint8_t mode, uint8_t* buffer)
+	// pojedynczo
+	//SH1106_char(0, 0, 'X', 16, 1, oled_buf);  // ok
+	//SH1106_char(0, 0, ']', 16, 1, oled_buf);  // ok, pojedynczo, byc moze powyzej, w string, funkcja ma buga
+	//SH1106_char(0, 0, '_', 16, 1, oled_buf);  // blad, pionowa kreska
+	//SH1106_char(0, 0, 'a', 16, 1, oled_buf);  // blad, nic
+	SH1106_char(0, 0, 'b', 16, 1, oled_buf);  //  blad, nic
+
+
+
+	SH1106_display(oled_buf);
 
 
 
