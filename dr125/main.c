@@ -143,7 +143,7 @@
 #define LCD_LED_SET		PORTB |= (1 << PB5)
 #define LCD_LED_RESET	PORTB &= ~(1 << PB5)
 
-
+uint8_t oled_buf[WIDTH * HEIGHT / 8];  // 1024 bytes  - located global results in memory overflow
 
 int main(void)
 {
@@ -152,7 +152,7 @@ int main(void)
 		
     // oled "new"
 	//todo move to better place
-	uint8_t oled_buf[WIDTH * HEIGHT / 8];  // 1024 bytes
+//	uint8_t oled_buf[WIDTH * HEIGHT / 8];  // 1024 bytes - located here there is no memory overflow
 
     ///////////////////////////////////////////////////////	
 	// display an image of bitmap matrix
@@ -381,9 +381,14 @@ int main(void)
 	//SH1106_char(0, 0, ']', 16, 1, oled_buf);  // ok, pojedynczo, byc moze powyzej, w string, funkcja ma buga
 	//SH1106_char(0, 0, '_', 16, 1, oled_buf);  // blad, pionowa kreska
 	//SH1106_char(0, 0, 'a', 16, 1, oled_buf);  // blad, nic
-	SH1106_char(0, 0, 'b', 16, 1, oled_buf);  //  blad, nic
+	//SH1106_char(0, 0, 'b', 16, 1, oled_buf);  //  blad, nic
 
 
+	//SH1106_char(0, 0, 'X', 16, 1, oled_buf);  // b podstawione za X
+
+
+	SH1106_char(0, 0, 'a', 16, 1, oled_buf);
+	//SH1106_char(0, 0, 'X', 16, 1, oled_buf);
 
 	SH1106_display(oled_buf);
 
