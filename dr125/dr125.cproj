@@ -140,6 +140,12 @@
     <Compile Include="dbg.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="font1608.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font1608.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

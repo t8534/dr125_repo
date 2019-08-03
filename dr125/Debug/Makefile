@@ -38,6 +38,7 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../dbg.c \
+../font1608.c \
 ../main.c \
 ../mcal_gpio.c \
 ../mcal_spi.c \
@@ -52,6 +53,7 @@ ASM_SRCS +=
 
 OBJS +=  \
 dbg.o \
+font1608.o \
 main.o \
 mcal_gpio.o \
 mcal_spi.o \
@@ -59,6 +61,7 @@ sh1106.o
 
 OBJS_AS_ARGS +=  \
 dbg.o \
+font1608.o \
 main.o \
 mcal_gpio.o \
 mcal_spi.o \
@@ -66,6 +69,7 @@ sh1106.o
 
 C_DEPS +=  \
 dbg.d \
+font1608.d \
 main.d \
 mcal_gpio.d \
 mcal_spi.d \
@@ -73,6 +77,7 @@ sh1106.d
 
 C_DEPS_AS_ARGS +=  \
 dbg.d \
+font1608.d \
 main.d \
 mcal_gpio.d \
 mcal_spi.d \
@@ -93,6 +98,13 @@ LINKER_SCRIPT_DEP+=
 
 # AVR32/GNU C Compiler
 ./dbg.o: .././dbg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./font1608.o: .././font1608.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

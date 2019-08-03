@@ -290,12 +290,6 @@ int main(void)
 	SH1106_string(0, 48, msg4, 16, 1, oled_buf);
 	*/
 
-	//SH1106_string(0, 0, msg4, 16, 1, oled_buf);  // tutaj smieci sa od Z
-
-
-	//SH1106_string(0, 0, msg5, 16, 1, oled_buf);  // czarny ekran
-
-
 /*
 	SH1106_char(0, 0, ' ', 16, 1, oled_buf);
 	SH1106_char(8, 0, '!', 16, 1, oled_buf);
@@ -359,7 +353,7 @@ int main(void)
 	SH1106_char(64, 48, 'Z', 16, 1, oled_buf);
 	SH1106_char(72, 48, '[', 16, 1, oled_buf);
 	SH1106_char(80, 48, ']', 16, 1, oled_buf);
-	SH1106_char(88, 48, '_', 16, 1, oled_buf);  // blednie odtad
+	SH1106_char(88, 48, '_', 16, 1, oled_buf);  
 	SH1106_char(96, 48, 'a', 16, 1, oled_buf);
 	SH1106_char(104, 48, 'b', 16, 1, oled_buf);
 	SH1106_char(112, 48, 'c', 16, 1, oled_buf);
@@ -367,28 +361,11 @@ int main(void)
 */
 
 
-	//const char *msg5 = "XYZ[]_abcd";	// XYZ[ ok, dalej smieci
-	//const char *msg5 = "XYZ[]";	// XYZ[ ok, dalej smieci
-	//const char *msg5 = "]";  // smiec
-	//const char *msg5 = "_";  // smiec
-	//const char *msg5 = "a";  // nic sie nie wyswietla
-	//const char *msg5 = "p";  // nic sie nie wyswietla
-	//SH1106_string(0, 0, msg5, 16, 1, oled_buf);  
-
-	//void SH1106_char(uint8_t x, uint8_t y, uint8_t acsii, uint8_t size, uint8_t mode, uint8_t* buffer)
-	// pojedynczo
-	//SH1106_char(0, 0, 'X', 16, 1, oled_buf);  // ok
-	//SH1106_char(0, 0, ']', 16, 1, oled_buf);  // ok, pojedynczo, byc moze powyzej, w string, funkcja ma buga
-	//SH1106_char(0, 0, '_', 16, 1, oled_buf);  // blad, pionowa kreska
-	//SH1106_char(0, 0, 'a', 16, 1, oled_buf);  // blad, nic
-	//SH1106_char(0, 0, 'b', 16, 1, oled_buf);  //  blad, nic
-
-
-	//SH1106_char(0, 0, 'X', 16, 1, oled_buf);  // b podstawione za X
-
-
-	SH1106_char(0, 0, 'a', 16, 1, oled_buf);
-	//SH1106_char(0, 0, 'X', 16, 1, oled_buf);
+	SH1106_char(0, 0, 'c', 16, 1, oled_buf);
+	SH1106_char(8, 0, 'r', 16, 1, oled_buf);
+	SH1106_char(16, 0, 'e', 16, 1, oled_buf);
+	SH1106_char(24, 0, 'k', 16, 1, oled_buf);
+	
 
 	SH1106_display(oled_buf);
 

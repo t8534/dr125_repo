@@ -4,6 +4,8 @@
 
 dbg.c
 
+font1608.c
+
 main.c
 
 mcal_gpio.c
