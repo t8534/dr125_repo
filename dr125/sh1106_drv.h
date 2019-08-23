@@ -47,12 +47,10 @@
   *
   */
   
-#ifndef _SH1106_H_
-#define _SH1106_H_
+#ifndef _SH1106_DRV_H_
+#define _SH1106_DRV_H_
 
 #include <stdint.h>
-
-//#include <avr/pgmspace.h>
 
 
 // OLED_RST_PIN - PORT C, pin 0
@@ -61,11 +59,10 @@
 // SPI_MOSI     - PORT B, pin 15
 // SPI_SCK      - PORT B, pin 14
 
-//todo: rename with prefix
-#define VCCSTATE SH1106_SWITCHCAPVCC
-#define WIDTH   128
-#define HEIGHT   64
-#define NUM_PAGE  8
+
+#define DISP_WIDTH   128
+#define DISP_HEIGHT   64
+
 
 //todo
 /*
@@ -77,7 +74,7 @@
 */
 
 //test
-//todo
+//todo perhaps move to .c
 #define OLED_RST  9 
 #define OLED_DC   8
 #define OLED_CS  10
@@ -89,36 +86,11 @@
 #define HIGH      1
 
 
-
-//test
-void digitalWrite(uint8_t pin, uint8_t state);
-
-
-void SH1106_begin(void);
-void SH1106_display(uint8_t* buffer);
-void SH1106_clear(uint8_t* buffer);
-void SH1106_pixel(int x, int y, char color, uint8_t* buffer);
-void SH1106_bitmap(uint8_t x, uint8_t y, const uint8_t *pBmp, uint8_t chWidth, uint8_t chHeight, uint8_t* buffer);
-void SH1106_char1616(uint8_t x,uint8_t y,uint8_t chChar, uint8_t* buffer);
-//void SH1106_char1612(uint8_t x,uint8_t y,uint8_t chChar, uint8_t* buffer  //arek test
-//void SH1106_char1608(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer);  //arek test
-void SH1106_char3216(uint8_t x, uint8_t y, uint8_t chChar, uint8_t* buffer);
-void SH1106_string(uint8_t x, uint8_t y, const char *pString, uint8_t Size, uint8_t Mode, uint8_t* buffer);
-void SPIWrite(uint8_t *buffer, int bufferLength);
-void command(uint8_t cmd);
-
-//arek
-void SH1106_char(uint8_t x, uint8_t y, uint8_t acsii, uint8_t size, uint8_t mode, uint8_t* buffer);
-
-//extern const uint8_t Font1612[11][32];
-//extern const uint8_t Font3216[11][64];
-//extern const uint8_t Signal816[16];
-//extern const uint8_t Msg816[16];
-//extern const uint8_t Bat816[16];
-//extern const uint8_t Bluetooth88[8];
-//extern const uint8_t GPRS88[8];
-//extern const uint8_t Alarm88[8];
-//extern const uint8_t Waveshare12864[1024];
+void SH1106_init(void);
+void SH1106_clearScreen(void);
+void SH1106_setPixel(int x, int y, char color);
+void SH1106_updateScreen(void);
 
 
-#endif
+
+#endif  // _SH1106_DRV_H_

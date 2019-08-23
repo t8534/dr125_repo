@@ -134,16 +134,49 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="bitmaps.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="bitmaps.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="dbg.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="dbg.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="font1608.c">
+    <Compile Include="f0806._c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="font1608.h">
+    <Compile Include="f0806._h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="f1206.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="f1206.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="f1608.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="f1608.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="f1612.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="f1612.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="f3216.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="f3216.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="font.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
@@ -161,10 +194,22 @@
     <Compile Include="mcal_spi.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="sh1106.c">
+    <Compile Include="sh1106_drv.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="sh1106.h">
+    <Compile Include="sh1106_drv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="disp_lib.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="disp_lib.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ui.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ui.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
