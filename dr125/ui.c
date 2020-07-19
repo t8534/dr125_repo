@@ -4,6 +4,11 @@
  *      Author: LiberdaA
  */
 
+// TODO:
+// 1.
+// Many independent screens support
+//
+
 #include "util/delay.h"
 
 #include "f1206.h"
@@ -17,14 +22,27 @@
 
 
 
+
 static const char *rpm_default = "9999";
 static const char *temperat_default = "999";
 static const char *volt_default = "99.99";
 static const char *mth_default = "9999";	
-	
+
+
+static uint16_t rpm;
+static uint16_t temperature;
+static uint16_t mth;
+static float volt;
+
 
 void UI_init()
 {
+	rpm = 0;
+	temperature = 0;
+	mth = 0;
+	volt = 0.0;
+
+
 
 	SH1106_init();
 	SH1106_clearScreen();
@@ -50,25 +68,32 @@ void UI_deInit()
 }
 
 
-void UI_updateRPM(uint16_t rpm)
+void UI_updateRPM(uint16_t _rpm)
 {
+	if (_rpm > 9999)
+		return;
+		
+}
+
+
+void UI_updateTempereature(uint16_t _temperature)
+{
+	if (_temperature > 999)
+		return;
 
 }
 
 
-void UI_updateTempereature(uint16_t temperature)
+void UI_updateMth(uint16_t _mth)
 {
-
+	if (_mth > 9999)
+	return;
 }
 
 
-void UI_updateMth(uint16_t mth)
-{
-
-}
 
 
-void UI_updateVolt(uint8_t volt)
+void UI_updateVolt(float _volt)
 {
 
 }

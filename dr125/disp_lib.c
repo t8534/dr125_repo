@@ -56,3 +56,22 @@ void DISP_bitmap(uint8_t x, uint8_t y, const uint8_t *pBmp, uint8_t chWidth, uin
 	}
 }
 
+
+// https://www.edaboard.com/showthread.php?238680-Decimal-to-ASCII-conversion-progam-in-C
+// Buffer lenght should be 1 longer then expected digit, to put '\0'
+void DISP_decToStr(uint8_t* str, uint8_t len, uint32_t val)
+{
+	uint8_t i;
+
+	for (i = 1; i <= len; i++)
+	{
+		str[len-i] = (uint8_t) ((val % 10UL) + '0');
+		val/=10;
+		
+		//if (val == 0)  // to avoid zero
+		//	break;
+	}
+
+	str[i-1] = '\0';
+		
+}

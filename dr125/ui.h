@@ -22,7 +22,7 @@ void UI_deInit();
 void UI_updateRPM(uint16_t rpm);
 void UI_updateTempereature(uint16_t temperature);
 void UI_updateMth(uint16_t mth);
-void UI_updateVolt(uint8_t volt);
+void UI_updateVolt(float volt);
 
 
 #endif /* UI_H_ */
