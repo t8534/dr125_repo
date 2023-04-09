@@ -142,6 +142,7 @@ void SH1106_clearScreen()
     {
         disp_buffer[i] = 0;
     }
+	SH1106_updateScreen();
 }
 
 
